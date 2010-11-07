@@ -1,0 +1,20 @@
+
+
+genome=mm9 ###
+typeAnno=acembly ###
+MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
+
+genomeRootDir=/lab/jaenisch_albert/genomes/
+
+genomeSizes=${genomeRootDir}/${genome}/${genome}_nr.sizes
+eventGff=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents #####
+rawGffFile=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents.pe.GFF3 #######
+
+targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
+readLen=36 ###
+pairedEndFlag="--paired-end 200 20"  #mean sd 
+clusterFlag="--use-cluster --chunk-jobs 1000"
+bamFileSubRoot=tophatOutput
+MISOOutSubRoot=MISOOnPE_splidarEvents
+
+misoRunSetting=miso_settings_splidarEvents.txt
