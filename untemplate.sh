@@ -1,5 +1,15 @@
 #!/bin/bash
 
+forceOverwrite=0
+
+if [ $# -gt 0 ]; then
+   if [[ $1 == "-f" ]]; then
+      forceOverwrite=1
+   else
+      echo $0 "[-f]"   
+  fi
+fi
+
 for i in *.template; do
 	
 	untmpName=${i/.template/}
