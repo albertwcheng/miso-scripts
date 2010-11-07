@@ -1,0 +1,11 @@
+untemplate the shvar files by
+
+bash untemplate.sh
+
+then, modify the setting files.
+
+use the appropriate setting files.
+
+*** IMPORTANT ***
+
+modify in the shvar file. the readLen variable.
