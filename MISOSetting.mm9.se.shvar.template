@@ -13,6 +13,6 @@ readLen=36 ###
 pairedEndFlag=""  #not paired end
 clusterFlag="--use-cluster --chunk-jobs 1000"
 bamFileSubRoot=tophatOutput
-MISOOutSubRoot=MISOOnPE
+MISOOutSubRoot=MISOOnSE
 
 misoRunSetting=miso_settings.txt
