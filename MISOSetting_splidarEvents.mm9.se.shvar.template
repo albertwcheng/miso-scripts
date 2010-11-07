@@ -1,4 +1,3 @@
-
 genome=mm9 ###
 typeAnno=acembly ###
 MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
@@ -14,6 +13,6 @@ readLen=36 ###
 pairedEndFlag="" 
 clusterFlag="--use-cluster --chunk-jobs 1000"
 bamFileSubRoot=tophatOutput
-MISOOutSubRoot=MISOOnPE_splidarEvents
+MISOOutSubRoot=MISOOnSE_splidarEvents
 
 misoRunSetting=miso_settings_splidarEvents.txt
