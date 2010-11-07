@@ -1,5 +1,4 @@
 
-
 genome=mm9 ###
 typeAnno=acembly ###
 MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
@@ -12,7 +11,7 @@ rawGffFile=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents.pe.GFF3 ##
 
 targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
 readLen=36 ###
-pairedEndFlag="--paired-end 200 20"  #mean sd 
+pairedEndFlag="" 
 clusterFlag="--use-cluster --chunk-jobs 1000"
 bamFileSubRoot=tophatOutput
 MISOOutSubRoot=MISOOnPE_splidarEvents
