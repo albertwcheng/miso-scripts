@@ -1,5 +1,4 @@
 
-
 genome=mm9 ###
 typeAnno=acembly ###
 MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
@@ -16,3 +15,5 @@ pairedEndFlag="--paired-end 200 20"  #mean sd
 clusterFlag="--use-cluster --chunk-jobs 1000"
 bamFileSubRoot=tophatOutput
 MISOOutSubRoot=MISOOnPE
+
+misoRunSetting=miso_settings.txt
