@@ -203,7 +203,7 @@ if __name__=='__main__':
 			eventIDIsoformIdxKeys=eventStruct.keys()
 			eventIDIsoformIdxKeys.sort()
 			for eventIDIsoformIdx in eventIDIsoformIdxKeys:
-				eventIsoforms.append("'"+eventID+"."+str(eventIDIsoformIdx)"'")
+				eventIsoforms.append("'"+eventID+"."+str(eventIDIsoformIdx)+"'")
 			
 			#now write new header
 			new_header=["["+",".join(eventIsoforms)+"]"]
