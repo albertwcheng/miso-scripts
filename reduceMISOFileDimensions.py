@@ -208,7 +208,7 @@ if __name__=='__main__':
 			#now write new header
 			new_header=["["+",".join(eventIsoforms)+"]"]
 			
-			print >> foutputMISO,new_header
+			print >> foutputMISO,"#"+"\t".join(new_header)
 			
 			for miso_row in range(0,len(log_score)):
 				sampled_psi_out=[]
