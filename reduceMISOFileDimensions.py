@@ -15,96 +15,92 @@ sampled_psi     log_score
 /lab/jaenisch_albert/genomes/hg18/annos/oldStuff/old.acembly$ grep ENAH acembly.pe.exonStringMap
 /lab/jaenisch_albert/genomes/hg18/annos/oldStuff/old.acembly$ grep ENAH acembly.pe.exonStringMap > byGenes/acembly.pe.exonStringMap.ENAH
 /lab/jaenisch_albert/genomes/hg18/annos/oldStuff/old.acembly$ less byGenes/acembly.pe.exonStringMap.ENAH 
-ENAH.bApr07	ENAH@EXON1_ENAH@EXON2_ENAH@EXON3_ENAH@EXON4_ENAH@EXON5_ENAH@EXON6_ENAH@EXON7_ENAH@EXON8_ENAH@EXON9_ENAH@EXON10_ENAH@EXON11_ENAH@EXON12_ENAH@EXON13_ENAH@EXON14
-ENAH.aApr07	ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
-ENAH.dApr07	ENAH@EXON39_ENAH@EXON40_ENAH@EXON41_ENAH@EXON42_ENAH@EXON43_ENAH@EXON44_ENAH@EXON45_ENAH@EXON46_ENAH@EXON47
-ENAH.iApr07	ENAH@EXON48_ENAH@EXON49_ENAH@EXON50
-ENAH.mApr07-unspliced	ENAH@EXON56
-ENAH.cApr07	ENAH@EXON59_ENAH@EXON60_ENAH@EXON61_ENAH@EXON62_ENAH@EXON63_ENAH@EXON64
-ENAH.fApr07-unspliced	ENAH@EXON65
-ENAH.jApr07	ENAH@EXON30_ENAH@EXON31_ENAH@EXON32_ENAH@EXON33
-ENAH.eApr07	ENAH@EXON66_ENAH@EXON67_ENAH@EXON68_ENAH@EXON69_ENAH@EXON70
-ENAH.hApr07	ENAH@EXON57_ENAH@EXON58
-ENAH.lApr07	ENAH@EXON34_ENAH@EXON35_ENAH@EXON36_ENAH@EXON37_ENAH@EXON38
-ENAH.kApr07	ENAH@EXON51_ENAH@EXON52_ENAH@EXON53_ENAH@EXON54_ENAH@EXON55
-ENAH.gApr07	ENAH@EXON71_ENAH@EXON72_ENAH@EXON73_ENAH@EXON74_ENAH@EXON75
+ENAH:mApr07-unspliced   ENAH@EXON66
+ENAH:bApr07     ENAH@EXON1_ENAH@EXON2_ENAH@EXON3_ENAH@EXON4_ENAH@EXON5_ENAH@EXON6_ENAH@EXON7_ENAH@EXON8_ENAH@EXON9_ENAH@EXON10_ENAH@EXON11_ENAH@EXON12_ENAH@EXON13_ENAH@EXON14
+ENAH:iApr07     ENAH@EXON58_ENAH@EXON59_ENAH@EXON60
+ENAH:fApr07-unspliced   ENAH@EXON75
+ENAH:jApr07     ENAH@EXON45_ENAH@EXON46_ENAH@EXON47_ENAH@EXON48
+ENAH:eApr07     ENAH@EXON35_ENAH@EXON36_ENAH@EXON37_ENAH@EXON38_ENAH@EXON39
+ENAH:dApr07     ENAH@EXON49_ENAH@EXON50_ENAH@EXON51_ENAH@EXON52_ENAH@EXON53_ENAH@EXON54_ENAH@EXON55_ENAH@EXON56_ENAH@EXON57
+ENAH:hApr07     ENAH@EXON67_ENAH@EXON68
+ENAH:aApr07     ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+ENAH:lApr07     ENAH@EXON30_ENAH@EXON31_ENAH@EXON32_ENAH@EXON33_ENAH@EXON34
+ENAH:gApr07     ENAH@EXON40_ENAH@EXON41_ENAH@EXON42_ENAH@EXON43_ENAH@EXON44
+ENAH:cApr07     ENAH@EXON69_ENAH@EXON70_ENAH@EXON71_ENAH@EXON72_ENAH@EXON73_ENAH@EXON74
+ENAH:kApr07     ENAH@EXON61_ENAH@EXON62_ENAH@EXON63_ENAH@EXON64_ENAH@EXON65
+(END) 
+
 
 
 /lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ makeTranscriptExonStringFromGff.py allEvents.pe.GFF3 > allEvents.pe.exonString
 cat allEvents.EBED | tr " " "\t" > allEvents.tabbed.ebed
 cheng@tak /lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ less allEvents.tabbed.ebed 
 
-/lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ rm  events2Transcript.map; python matchEventToTranscript.py  allEvents.tabbed.ebed  ../annos/acembly.ebed  > events2Transcript.map
+/lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ rm  events2Transcript.map; Splidar.Splicing.matchEventToTranscript.py  allEvents.tabbed.ebed  ../annos/acembly.ebed  > events2Transcript.map
 
-RI.ENAH.27053.1	ENAH.iApr07
-RI.ENAH.27051.2	ENAH.jApr07
-SE.ENAH.47366.2	ENAH.aApr07
-RI.ENAH.27051.2	ENAH.kApr07
-Alt3UTR.ENAH.2992.1	ENAH.aApr07
-Alt3UTR.ENAH.2995.1	ENAH.aApr07
-Alt3UTR.ENAH.2997.1	ENAH.aApr07
-Alt3UTR.ENAH.2999.2	ENAH.aApr07
-AFE.ENAH.43749.2	ENAH.aApr07
-AFE.ENAH.43751.2	ENAH.aApr07
-SE.ENAH.47366.1	ENAH.lApr07
-RI.ENAH.27052.1	ENAH.iApr07
-RI.ENAH.27052.2	ENAH.kApr07
-Alt3UTR.ENAH.2993.1	ENAH.aApr07
-Alt3UTR.ENAH.2996.1	ENAH.aApr07
-Alt3UTR.ENAH.2998.1	ENAH.aApr07
-Alt3UTR.ENAH.2999.1	ENAH.aApr07
-RI.ENAH.27053.2	ENAH.jApr07
-Alt3UTR.ENAH.2990.1	ENAH.aApr07
-Alt3UTR.ENAH.2994.2	ENAH.aApr07
-Alt3UTR.ENAH.2995.2	ENAH.aApr07
-Alt3UTR.ENAH.2996.2	ENAH.aApr07
-RI.ENAH.27051.1	ENAH.iApr07
-RI.ENAH.27053.2	ENAH.dApr07
-SE.ENAH.47367.2	ENAH.iApr07
-Alt3UTR.ENAH.2990.2	ENAH.dApr07
-Alt3UTR.ENAH.2991.2	ENAH.dApr07
-Alt3UTR.ENAH.2992.2	ENAH.dApr07
+RI.ENAH.27053.1	ENAH.iApr07	chr1
+RI.ENAH.27051.2	ENAH.jApr07	chr1
+SE.ENAH.47366.2	ENAH.aApr07	chr1
+RI.ENAH.27051.2	ENAH.kApr07	chr1
+Alt3UTR.ENAH.2992.1	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2995.1	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2997.1	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2999.2	ENAH.aApr07	chr1
+AFE.ENAH.43749.2	ENAH.aApr07	chr1
+AFE.ENAH.43751.2	ENAH.aApr07	chr1
+SE.ENAH.47366.1	ENAH.lApr07	chr1
+RI.ENAH.27052.1	ENAH.iApr07	chr1
+RI.ENAH.27052.2	ENAH.kApr07	chr1
+Alt3UTR.ENAH.2993.1	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2996.1	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2998.1	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2999.1	ENAH.aApr07	chr1
+RI.ENAH.27053.2	ENAH.jApr07	chr1
+Alt3UTR.ENAH.2990.1	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2994.2	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2995.2	ENAH.aApr07	chr1
+Alt3UTR.ENAH.2996.2	ENAH.aApr07	chr1
 
 
 etc
 
-/lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ joinu.py -1 2 -2 1  events2Transcript.map  ../annos/oldStuff/old.acembly//byGenes/acembly.pe.exonStringMap.ENAH > events2Transcript.map.exonString.ENAH
+/lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ cat events2Transcript.map | tr "." ":" > events2Transcript.map.colon
 
-cheng@tak /lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ colStat.py -r1,2,3,4,5 events2Transcript.map.exonString.ENAH.col  #events2TranscriptExonStringCol
-[:::::			R 1			:::::]
-Index			Excel			Field
------			-----			-----
-1			A			RI.ENAH.27053.1
-2			B			ENAH.iApr07
-3			C			ENAH@EXON48_ENAH@EXON49_ENAH@EXON50
-[:::::			R 2			:::::]
+rm ../annos/acembly.pe.exonStringMap.ENAH;  grep ENAH  ../annos/acembly.pe.exonStringMap >  ../annos/acembly.pe.exonStringMap.ENAH
+
+/lab/jaenisch_albert/genomes/hg18/SplidarEventGff$ rm  events2Transcript.map.exonString.ENAH; joinu.py -1 2 -2 1  events2Transcript.map.colon  ../annos/acembly.pe.exonStringMap.ENAH > events2Transcript.map.exonString.ENAH
+
+RI.ENAH.27053.1 ENAH.iApr07     chr1    ENAH@EXON48_ENAH@EXON49_ENAH@EXON50
+RI.ENAH.27051.2 ENAH.jApr07     chr1    ENAH@EXON30_ENAH@EXON31_ENAH@EXON32_ENAH@EXON33
+SE.ENAH.47366.2 ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+RI.ENAH.27051.2 ENAH.kApr07     chr1    ENAH@EXON51_ENAH@EXON52_ENAH@EXON53_ENAH@EXON54_ENAH@EXON55
+Alt3UTR.ENAH.2992.1     ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+Alt3UTR.ENAH.2995.1     ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+Alt3UTR.ENAH.2997.1     ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+Alt3UTR.ENAH.2999.2     ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+AFE.ENAH.43749.2        ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+AFE.ENAH.43751.2        ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+SE.ENAH.47366.1 ENAH.lApr07     chr1    ENAH@EXON34_ENAH@EXON35_ENAH@EXON36_ENAH@EXON37_ENAH@EXON38
+RI.ENAH.27052.1 ENAH.iApr07     chr1    ENAH@EXON48_ENAH@EXON49_ENAH@EXON50
+RI.ENAH.27052.2 ENAH.kApr07     chr1    ENAH@EXON51_ENAH@EXON52_ENAH@EXON53_ENAH@EXON54_ENAH@EXON55
+Alt3UTR.ENAH.2993.1     ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+Alt3UTR.ENAH.2996.1     ENAH.aApr07     chr1    ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+
+rm events2Transcript.map.exonString.ENAH.col; stickColValues.py --internalfs , events2Transcript.map.exonString.ENAH 1 > events2Transcript.map.exonString.ENAH.col
+
+
+colStat.py -r2 events2Transcript.map.exonString.ENAH.col  #events2TranscriptExonStringCol[:::::			R 2			:::::]
 Index			Excel			Field
 -----			-----			-----
 1			A			RI.ENAH.27051.2
 2			B			ENAH.jApr07,ENAH.kApr07,ENAH.dApr07,ENAH.bApr07,ENAH.aApr07
-3			C			ENAH@EXON30_ENAH@EXON31_ENAH@EXON32_ENAH@EXON33,ENAH@EXON51_ENAH@EXON52_ENAH@EXON53_ENAH@EXON54_ENAH@EXON55,ENAH@EXON39_ENAH@EXON40_ENAH@EXON41_ENAH@EXON42_ENAH@EXON43_ENAH@EXON44_ENAH@EXON45_ENAH@EXON46_ENAH@EXON47,ENAH@EXON1_ENAH@EXON2_ENAH@EXON3_ENAH@EXON4_ENAH@EXON5_ENAH@EXON6_ENAH@EXON7_ENAH@EXON8_ENAH@EXON9_ENAH@EXON10_ENAH@EXON11_ENAH@EXON12_ENAH@EXON13_ENAH@EXON14,ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
-[:::::			R 3			:::::]
-Index			Excel			Field
------			-----			-----
-1			A			SE.ENAH.47366.2
-2			B			ENAH.aApr07,ENAH.bApr07
-3			C			ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29,ENAH@EXON1_ENAH@EXON2_ENAH@EXON3_ENAH@EXON4_ENAH@EXON5_ENAH@EXON6_ENAH@EXON7_ENAH@EXON8_ENAH@EXON9_ENAH@EXON10_ENAH@EXON11_ENAH@EXON12_ENAH@EXON13_ENAH@EXON14
-[:::::			R 4			:::::]
-Index			Excel			Field
------			-----			-----
-1			A			Alt3UTR.ENAH.2992.1
-2			B			ENAH.aApr07,ENAH.bApr07
-3			C			ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29,ENAH@EXON1_ENAH@EXON2_ENAH@EXON3_ENAH@EXON4_ENAH@EXON5_ENAH@EXON6_ENAH@EXON7_ENAH@EXON8_ENAH@EXON9_ENAH@EXON10_ENAH@EXON11_ENAH@EXON12_ENAH@EXON13_ENAH@EXON14
-[:::::			R 5			:::::]
-Index			Excel			Field
------			-----			-----
-1			A			Alt3UTR.ENAH.2995.1
-2			B			ENAH.aApr07,ENAH.bApr07
-3			C			ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29,ENAH@EXON1_ENAH@EXON2_ENAH@EXON3_ENAH@EXON4_ENAH@EXON5_ENAH@EXON6_ENAH@EXON7_ENAH@EXON8_ENAH@EXON9_ENAH@EXON10_ENAH@EXON11_ENAH@EXON12_ENAH@EXON13_ENAH@EXON14
-
-''''
+3			C			chr1
+4			D			ENAH@EXON30_ENAH@EXON31_ENAH@EXON32_ENAH@EXON33,ENAH@EXON51_ENAH@EXON52_ENAH@EXON53_ENAH@EXON54_ENAH@EXON55,ENAH@EXON39_ENAH@EXON40_ENAH@EXON41_ENAH@EXON42_ENAH@EXON43_ENAH@EXON44_ENAH@EXON45_ENAH@EXON46_ENAH@EXON47,ENAH@EXON1_ENAH@EXON2_ENAH@EXON3_ENAH@EXON4_ENAH@EXON5_ENAH@EXON6_ENAH@EXON7_ENAH@EXON8_ENAH@EXON9_ENAH@EXON10_ENAH@EXON11_ENAH@EXON12_ENAH@EXON13_ENAH@EXON14,ENAH@EXON15_ENAH@EXON16_ENAH@EXON17_ENAH@EXON18_ENAH@EXON19_ENAH@EXON20_ENAH@EXON21_ENAH@EXON22_ENAH@EXON23_ENAH@EXON24_ENAH@EXON25_ENAH@EXON26_ENAH@EXON27_ENAH@EXON28_ENAH@EXON29
+'''
 
 from sys import *
+import os.path
+import os
 
 def parseMISOFile(filename):
 	#return (sampled_psi[exonString][MISORow]=float,logScore[MISORow]=float)
@@ -112,42 +108,54 @@ def parseMISOFile(filename):
 	log_scores=[]
 	
 	fil=open(filename)
-	lines=fil.getlines()
+	lines=fil.readlines()
 	fil.close()
 	
 	#first parse header	
-	header=lines[0]
+	header=lines[0].rstrip("\r\n")
 	
 	try:
-		if header[0,11]!="#isoforms=[":
+		if header[0:11]!="#isoforms=[":
 			raise ValueError
 		headerIsoformString=header[10:].split("\t")[0]
-		isoformExonStrings=eval(headerIsoformString)			
+		isoformExonStrings=eval(headerIsoformString)				
 	except:
 		print >> stderr,"MISO Header Format Error filename="+filename
 		exit()
 	
-
+	#print >> stderr,"isoformExonStrings",isoformExonStrings
 	
 	#now go to other lines
-	if lines[2].split("\t")[0]!="sampled_psi":
-		print >> stderr,"MISO Header Format Error filename="+filename
+	if lines[1].split("\t")[0]!="sampled_psi":
+		print >> stderr,"MISO Table Format Error filename="+filename
 		exit()
 	
 	for isoformExonString in isoformExonStrings:
 		sampled_psi[isoformExonString]=[]
 	
-	for lin in lines[3:]:
-		sampled_psi_str,log_score=lin.rstrip("\r\n").split("\t")
-		sampled_psi_str.split(",")
-		log_score.append(log_score)
-		for isoformExonString,sampled_psi_stron in zip(isoformExonStrings,sampled_psi_str):
-			sampled_psi[isoformExonString].append(float(sampled_psi_stron))
-
-	return (sampled_psi,log_score)
+	for lin in lines[2:]:
+		try:
+			sampled_psi_str,log_score=lin.rstrip("\r\n").split("\t")
+			sampled_psi_str=sampled_psi_str.split(",")
+			log_scores.append(log_score)
+			for isoformExonString,sampled_psi_stron in zip(isoformExonStrings,sampled_psi_str):
+				sampled_psi[isoformExonString].append(float(sampled_psi_stron))
+		except:
+			print >> stderr,"error at line:",lin
+			print >> stderr,"sampled_psi_str:",sampled_psi_str
+			exit()
+			
+	return (sampled_psi,log_scores)
 	
 
+'''
+misoFileDir=/lab/solexa_jaenisch/Albert2/mRNASeqLibs/EMT/MISOOnSE_acembly/MISOOutput.ENAH/Epithelial
+events2TranscriptExonStringColFile=/lab/jaenisch_albert/genomes/hg18/SplidarEventGff/events2Transcript.map.exonString.ENAH.col
+outputMISODir=/lab/solexa_jaenisch/Albert2/mRNASeqLibs/EMT/MISOOnSE_acembly_reduced/MISOOutput.ENAH/Epithelial
 
+python reduceMISOFileDimensions.py $misoFileDir $events2TranscriptExonStringColFile $outputMISODir
+
+'''
 
 
 def printUsageAndExit(programName):
@@ -162,21 +170,27 @@ if __name__=='__main__':
 	except:
 		printUsageAndExit(programName)
 	
+	if not os.path.isdir(outputMISODir):
+		os.makedirs(outputMISODir)
+	
 	E2TXStrMap=dict()
+	GeneChromMap=dict()
 	#E2TXStrMap[eventGeneName][eventName][1|2...]=([transcriptID...],[exonString,..])
 	filE2TXStr=open(events2TranscriptExonStringColFile)
 	for lin in filE2TXStr:
 		fields=lin.rstrip("\r\n").split("\t")
-		eventID=fields[0].split(".")
-		eventGeneName=eventID[1] #Alt3UTR.ENAH.2995.1   -> ENAH
+		eventID=fields[0].split(":")
+		eventGeneName=":".join(eventID[1:-2]) #Alt3UTR:ENAH:2995:1   -> ENAH
 		eventIDIsoformIdx=int(eventID[-1])
-		eventID=".".join(eventID[:-1])
+		eventID=":".join(eventID[:-1])
 		transcriptIDs=fields[1].split(",")
-		exonStrings=fields[2].split(",")
+		exonStrings=fields[3].split(",")
+		chrom=fields[2]
 		try:
 			eventGeneStruct=E2TXStrMap[eventGeneName]
 		except KeyError:
 			eventGeneStruct=dict()
+			GeneChromMap[eventGeneName]=chrom
 			E2TXStrMap[eventGeneName]=eventGeneStruct
 		
 		try:
@@ -195,9 +209,20 @@ if __name__=='__main__':
 	
 	#now go every event and process the corresponding eventGeneName.miso file
 	for eventGeneName,eventGeneStruct in E2TXStrMap.items():
-		sampled_psi,log_score=parseMISOFile(misoFileDir+"/"+eventGeneName+".miso")
+		chrom=GeneChromMap[eventGeneName]
+		misoFileName=misoFileDir+"/"+chrom+"/"+eventGeneName+".miso"
+		if not os.path.isfile(misoFileName):
+			print >> stderr,"miso file for gene",eventGeneName,"does not exists:",misoFileName
+			continue
+			
+		sampled_psi,log_score=parseMISOFile(misoFileDir+"/"+chrom+"/"+eventGeneName+".miso")
 		for eventID,eventStruct in eventGeneStruct.items():
-			outputMISOFileName=outputMISODir+"/"+eventID+".miso"
+			
+			outputMISOPath=outputMISODir+"/"+chrom
+			if not os.path.isdir(outputMISOPath):
+				os.makedirs(outputMISOPath)
+			outputMISOFileName=outputMISOPath+"/"+eventID+".miso"
+			
 			foutputMISO=open(outputMISOFileName,"w")
 			eventIsoforms=[]
 			eventIDIsoformIdxKeys=eventStruct.keys()
@@ -206,18 +231,36 @@ if __name__=='__main__':
 				eventIsoforms.append("'"+eventID+"."+str(eventIDIsoformIdx)+"'")
 			
 			#now write new header
-			new_header=["["+",".join(eventIsoforms)+"]"]
+			new_header=["isoforms=["+",".join(eventIsoforms)+"]"]
+			
+			
 			
 			print >> foutputMISO,"#"+"\t".join(new_header)
 			
+			print >> foutputMISO,"sampled_psi\tlog_score"
+			
 			for miso_row in range(0,len(log_score)):
 				sampled_psi_out=[]
+				isoform_cpsi=[]
+				ccpsi=0.0
 				for eventIDIsoformIdx in eventIDIsoformIdxKeys:
 					transcriptIDs,exonStrings=eventStruct[eventIDIsoformIdx]
 					cpsi=0.0
 					for exonString in exonStrings:
-						cpsi+=sampled_psi[exonString][miso_row]
-					sampled_psi_out.append(str(cpsi))
+						try:
+							cpsi+=sampled_psi[exonString][miso_row]
+						except KeyError:
+							print >> stderr,"exon string",exonString,"in gene ",eventGeneName," requested. Presumably due to overlapping genes. pass"
+							continue
+							
+					isoform_cpsi.append(cpsi)
+					ccpsi+=cpsi
+				
+				if ccpsi==0.0:
+					continue
+				
+				for cpsi in isoform_cpsi:
+					sampled_psi_out.append(str(cpsi/ccpsi))
 			
 				sampled_psi_out=",".join(sampled_psi_out)
 				print >> foutputMISO,sampled_psi_out+"\t"+log_score[miso_row]
