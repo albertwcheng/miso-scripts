@@ -1,0 +1,30 @@
+
+
+genome=hg18 ###
+typeAnno=acembly ###
+MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
+
+genomeRootDir=/lab/jaenisch_albert/genomes/
+
+genomeSizes=${genomeRootDir}/${genome}/${genome}_nr.sizes
+eventGff=/lab/jaenisch_albert/genomes/${genome}/SplidarEventGff/allEvents #####
+rawGffFile=/lab/jaenisch_albert/genomes/${genome}/SplidarEventGff/allEvents.pe.GFF3 #######
+rawEbedFile=/lab/jaenisch_albert/genomes/${genome}/SplidarEventGff/allEvents.EBED ####
+exonStringMap=/lab/jaenisch_albert/genomes/${genome}/SplidarEventGff/allEvents.pe.exonStringMap
+
+event2TranscriptMap=/lab/jaenisch_albert/genomes/${genome}/SplidarEventGff/events2Transcript.map
+
+transcriptGff=/lab/jaenisch_albert/genomes/${genome}/annos/${typeAnno}.pe.gff3
+transcrriptExonStringMap=/lab/jaenisch_albert/genomes/${genome}/annos/${typeAnno}.pe.exonStringMap
+transcriptEbed=/lab/jaenisch_albert/genomes/${genome}/annos/${typeAnno}.ebed
+transcriptMISOOutput=MISOOnSE_acembly/MISOOutput/
+
+targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
+readLen=39 ###
+pairedEndFlag=""  #mean sd 
+clusterFlag="--use-cluster --chunk-jobs 1000"
+bamFileSubRoot=tophatOutput
+MISOOutSubRoot=MISOOnSE_splidarEvents
+
+misoRunSetting=miso_settings_splidarEvents.txt
+
