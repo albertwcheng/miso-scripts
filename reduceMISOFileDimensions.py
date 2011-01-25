@@ -223,13 +223,15 @@ if __name__=='__main__':
 				os.makedirs(outputMISOPath)
 			outputMISOFileName=outputMISOPath+"/"+eventID+".miso"
 			
-			foutputMISO=open(outputMISOFileName,"w")
+			
 			eventIsoforms=[]
 			eventIDIsoformIdxKeys=eventStruct.keys()
 			eventIDIsoformIdxKeys.sort()
 			
 			if len(eventIDIsoformIdxKeys)<2: #only one isoform for this event mappable back to the transcript ignore
 				continue
+			
+			foutputMISO=open(outputMISOFileName,"w")
 			
 			for eventIDIsoformIdx in eventIDIsoformIdxKeys:
 				eventIsoforms.append("'"+eventID+"."+str(eventIDIsoformIdx)+"'")
