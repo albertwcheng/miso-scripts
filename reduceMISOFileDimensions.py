@@ -228,7 +228,7 @@ if __name__=='__main__':
 			eventIDIsoformIdxKeys=eventStruct.keys()
 			eventIDIsoformIdxKeys.sort()
 			
-			if len(eventIDIsoformIdxKeys)==1: #only one isoform for this event mappable back to the transcript ignore
+			if len(eventIDIsoformIdxKeys)<2: #only one isoform for this event mappable back to the transcript ignore
 				continue
 			
 			for eventIDIsoformIdx in eventIDIsoformIdxKeys:
