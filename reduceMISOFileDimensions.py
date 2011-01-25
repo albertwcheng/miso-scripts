@@ -227,6 +227,10 @@ if __name__=='__main__':
 			eventIsoforms=[]
 			eventIDIsoformIdxKeys=eventStruct.keys()
 			eventIDIsoformIdxKeys.sort()
+			
+			if len(eventIDIsoformIdxKeys)==1: #only one isoform for this event mappable back to the transcript ignore
+				continue
+			
 			for eventIDIsoformIdx in eventIDIsoformIdxKeys:
 				eventIsoforms.append("'"+eventID+"."+str(eventIDIsoformIdx)+"'")
 			
