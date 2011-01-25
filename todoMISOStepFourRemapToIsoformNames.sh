@@ -63,12 +63,13 @@ Index			Excel			Field
 COMMENT
 
 
-if [ $# -lt 1 ]; then
-	echo $0 MISOSettingFile
+if [ $# -ne 2 ]; then
+	echo $0 MISOSettingFile "mode[normal|reduced]"
 	exit
 fi
 
 MISOSettingFile=$1
+mode=$2
 
 source ${MISOSettingFile}
 
@@ -80,10 +81,21 @@ rootDir=`pwd`
 
 
 tophatOutputDir=$rootDir/$bamFileSubRoot
-MISOOutputDir=$rootDir/${MISOOutSubRoot}/MISOOutput
-MISOSummaryDir=$rootDir/${MISOOutSubRoot}/MISOSummary
-MISOComparisonsDir=$rootDir/${MISOOutSubRoot}/MISOComparisons
-
+if [[ $mode == "normal" ]]; then
+	echo remapToIsoformNames in the normal MISO mode
+	MISOOutputDir=$rootDir/${MISOOutSubRoot}/MISOOutput
+	MISOSummaryDir=$rootDir/${MISOOutSubRoot}/MISOSummary
+	MISOComparisonsDir=$rootDir/${MISOOutSubRoot}/MISOComparisons
+elif [[ $mode == "reduced" ]]; then
+	echo summarizing the MISO full-transcript reduced to Splidar mode
+	MISOOutputDir=$rootDir/${MISOOutSubRoot}/MISOOutput.reduced
+	MISOSummaryDir=$rootDir/${MISOOutSubRoot}/MISOSummary.reduced
+	MISOComparisonsDir=$rootDir/${MISOOutSubRoot}/MISOComparisons.reduced
+else
+	echo unknown summary mode $mode
+	bash $0
+	exit
+fi
 
 for sampleDir in $tophatOutputDir/*; do
 
@@ -104,8 +116,14 @@ cuta.py -f.isoforms ${sampleName}.miso_summary.dq | awk -v FS="\t" -v OFS="\t" '
 #now dissociate
 dissociateColValues.py -i, -s2 ${sampleName}.miso_summary.isoforms > ${sampleName}.miso_summary.isoforms.dissociated
 
+rawGffFileNoExt=${rawGffFile/.gff/}
+rawGffFileNoExt=${rawGffFileNoExt/.GFF/}
+rawGffFileNoExt=${rawGffFileNoExt/.gff3/}
+rawGffFileNoExt=${rawGffFileNoExt/.GFF3/}
+
+
 #now map
-joinu.py -1.isoforms -2.isoforms ${sampleName}.miso_summary.isoforms.dissociated ${rawGffFile/.gff/}.exonStringMap > ${sampleName}.miso_summary.isoforms.dissociated.2transcriptName
+joinu.py -1.isoforms -2.isoforms ${sampleName}.miso_summary.isoforms.dissociated $rawGffFileNoExt.exonStringMap > ${sampleName}.miso_summary.isoforms.dissociated.2transcriptName
 
 #now collapse
 stickColValues.py --internalfs "," ${sampleName}.miso_summary.isoforms.dissociated.2transcriptName 1 | cut -f2,3 > ${sampleName}.miso_summary.isoforms.2transcriptName
@@ -138,8 +156,13 @@ cuta.py -f.isoforms ${i}.dq | awk -v FS="\t" -v OFS="\t" '{printf("%d\t%s\n",FNR
 #now dissociate
 dissociateColValues.py -i, -s2 ${i}.isoforms > ${i}.isoforms.dissociated
 
+rawGffFileNoExt=${rawGffFile/.gff/}
+rawGffFileNoExt=${rawGffFileNoExt/.GFF/}
+rawGffFileNoExt=${rawGffFileNoExt/.gff3/}
+rawGffFileNoExt=${rawGffFileNoExt/.GFF3/}
+
 #now map
-joinu.py -1.isoforms -2.isoforms ${i}.isoforms.dissociated ${rawGffFile/.gff/}.exonStringMap > ${i}.isoforms.dissociated.2transcriptName
+joinu.py -1.isoforms -2.isoforms ${i}.isoforms.dissociated $rawGffFileNoExt.exonStringMap > ${i}.isoforms.dissociated.2transcriptName
 
 #now collapse
 stickColValues.py --internalfs "," ${i}.isoforms.dissociated.2transcriptName 1 | cut -f2,3 > ${i}.isoforms.2transcriptName
