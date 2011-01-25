@@ -20,4 +20,5 @@ sourceName=`basename $ebedfile`
 sourceName=${sourceName/.ebed/}
 
 ebed2GenePred.py $ebedfile > ${ebedfile/.ebed/}.genePred
-RefGeneTable2sGFF3.py --source $sourceName --replace "_./" --with "@::" --input-is-gene-pred --expand-parents ${ebedfile/.ebed/}.genePred > $gffFile 
+RefGeneTable2sGFF3.py --output-rename-list  $gffFile.renamelist  --source $sourceName --replace "_./" --with "@::" --input-is-gene-pred --expand-parents ${ebedfile/.ebed/}.genePred > $gffFile 
+
