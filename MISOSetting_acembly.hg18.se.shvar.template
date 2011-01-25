@@ -1,0 +1,19 @@
+genome=hg18 ###
+typeAnno=acembly ###
+MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
+
+genomeRootDir=/lab/jaenisch_albert/genomes/
+
+genomeSizes=${genomeRootDir}/${genome}/${genome}_nr.sizes
+eventGff=${genomeRootDir}/${genome}/annos/${typeAnno} ###
+rawGffFile=${genomeRootDir}/${genome}/annos/${typeAnno}.pe.gff3 ##
+rawEbedFile=${genomeRootDir}/${genome}/annos/${typeAnno}.ebed  ###
+
+targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
+readLen=39 ###
+pairedEndFlag=""   
+clusterFlag="--use-cluster --chunk-jobs 1000"
+bamFileSubRoot=tophatOutput
+MISOOutSubRoot=MISOOnSE_acembly
+
+misoRunSetting=miso_settings_acembly.txt
