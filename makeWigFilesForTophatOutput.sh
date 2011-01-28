@@ -1,4 +1,3 @@
-
 if [ $# -ne 2 ]; then
 	echo $0 MISOSettingFile HttpAddress
 	exit
@@ -76,7 +75,7 @@ bedGraphToBigWig  ${sampleName}.RPM.l2x1.wig $genomeSizes ${sampleName}.RPM.l2x1
 rm $bigWigOutputDir/${sampleName}-*.RPM.l2x1.wig.bw
 ln ${sampleName}.RPM.l2x1.wig.bw $bigWigOutputDir/${sampleName}-${randSuffix}.RPM.l2x1.wig.bw
 echo "track type=bigWig name=\"$sampleName.log2(RPM+1)\" description=\"log2(RPM+1) of $sampleName\" bigDataUrl=$HttpAddress/${sampleName}-${randSuffix}.RPM.l2x1.wig.bw visibility=Full color=$thisColor visilibility=Full" > $sampleName.RPM.l2x1.bwlink.wig
-echo "#number of reads: $numOfReads Unit: RPM=read*1000000/numOfReadsMapped" >> $sampleName.RPM.l2x1.bwlink.wig
+echo "#number of reads: $numOfReads Unit: log2(RPM+1) RPM=read*1000000/numOfReadsMapped" >> $sampleName.RPM.l2x1.bwlink.wig
 cp $sampleName.RPM.l2x1.bwlink.wig $bigWigOutputDir/
 
 
