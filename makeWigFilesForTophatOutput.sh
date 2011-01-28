@@ -65,7 +65,7 @@ awk -v FS="\t" -v OFS="\t" -v numOfReads=$numOfReads '{if(FNR>1 && $2<$3 ){$4=$4
 bedGraphToBigWig  ${sampleName}.RPM.wig $genomeSizes ${sampleName}.RPM.wig.bw
 rm $bigWigOutputDir/${sampleName}-*.RPM.wig.bw
 ln ${sampleName}.RPM.wig.bw $bigWigOutputDir/${sampleName}-${randSuffix}.RPM.wig.bw
-echo "track type=bigWig name=\"$sampleName.RPM\" description=\"RPM of $sampleName\" bigDataUrl=$HttpAddress/${sampleName}-${randSuffix}.RPM.wig.bw visibility=Full color=$thisColor visilibility=Full" > $sampleName.RPM.bwlink.wig
+echo "track type=bigWig name=\"$sampleName.RPM\" description=\"RPM of $sampleName\" bigDataUrl=$HttpAddress/${sampleName}-${randSuffix}.RPM.wig.bw visibility=Full color=$thisColor alwaysZero=On" > $sampleName.RPM.bwlink.wig
 echo "#number of reads: $numOfReads Unit: RPM=read*1000000/numOfReadsMapped" >> $sampleName.RPM.bwlink.wig
 cp $sampleName.RPM.bwlink.wig $bigWigOutputDir/
 
@@ -74,7 +74,7 @@ awk -v FS="\t" -v OFS="\t" -v numOfReads=$numOfReads 'BEGIN{logb=log(2)}{if(FNR>
 bedGraphToBigWig  ${sampleName}.RPM.l2x1.wig $genomeSizes ${sampleName}.RPM.l2x1.wig.bw
 rm $bigWigOutputDir/${sampleName}-*.RPM.l2x1.wig.bw
 ln ${sampleName}.RPM.l2x1.wig.bw $bigWigOutputDir/${sampleName}-${randSuffix}.RPM.l2x1.wig.bw
-echo "track type=bigWig name=\"$sampleName.log2(RPM+1)\" description=\"log2(RPM+1) of $sampleName\" bigDataUrl=$HttpAddress/${sampleName}-${randSuffix}.RPM.l2x1.wig.bw visibility=Full color=$thisColor visilibility=Full" > $sampleName.RPM.l2x1.bwlink.wig
+echo "track type=bigWig name=\"$sampleName.log2(RPM+1)\" description=\"log2(RPM+1) of $sampleName\" bigDataUrl=$HttpAddress/${sampleName}-${randSuffix}.RPM.l2x1.wig.bw visibility=Full color=$thisColor alwaysZero=On" > $sampleName.RPM.l2x1.bwlink.wig
 echo "#number of reads: $numOfReads Unit: log2(RPM+1) RPM=read*1000000/numOfReadsMapped" >> $sampleName.RPM.l2x1.bwlink.wig
 cp $sampleName.RPM.l2x1.bwlink.wig $bigWigOutputDir/
 
