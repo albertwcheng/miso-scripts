@@ -24,7 +24,7 @@ for sampleDir in $tophatOutputDir/*; do
 
 
 
-#echo $sampleDir
+echo $sampleDir
 
 if [ -e $sampleDir/accepted_hits.bam ]; then
 	samtools sort $sampleDir/accepted_hits.bam $sampleDir/accepted_hits.sorted
