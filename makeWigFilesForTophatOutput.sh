@@ -78,7 +78,7 @@ echo "#number of reads: $numOfReads Unit: RPM=read*1000000/numOfReadsMapped" >> 
 cp $sampleName.RPM.bwlink.wig $bigWigOutputDir/
 fi
 
-gzip ${sampleName}.RPM.wig
+gzip -f ${sampleName}.RPM.wig
 
 
 #log2(x+1)
@@ -93,7 +93,7 @@ echo "#number of reads: $numOfReads Unit: log2(RPM+1) RPM=read*1000000/numOfRead
 cp $sampleName.RPM.l2x1.bwlink.wig $bigWigOutputDir/
 fi
 
-gzip ${sampleName}.RPM.l2x1.wig
+gzip -f ${sampleName}.RPM.l2x1.wig
 
 rm $tmName
 
