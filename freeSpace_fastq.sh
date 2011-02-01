@@ -3,6 +3,8 @@
 
 cd ..
 
+
+if [ -e fastq ]; then
 cd fastq
 for i in *.fastq; do
 	gzip $i
@@ -16,7 +18,9 @@ for i in *.txt; do
 	gzip $i
 done
 cd ..
+fi
 
+if [ -e mergedsolfq ]; then
 cd mergedsolfq
 for i in *.fastq; do
 	gzip $i
@@ -30,3 +34,4 @@ for i in *.txt; do
 	gzip $i
 done
 cd ..
+fi
