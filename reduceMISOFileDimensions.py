@@ -165,9 +165,13 @@ def printUsageAndExit(programName):
 
 if __name__=='__main__':
 	programName=argv[0]
-	opts,args=getopt(argv[1:],'',['abort-less-than'])
+	opts,args=getopt(argv[1:],'',['abort-less-than='])
 	
 	abortLessThan=100
+	
+	for o,v in opts:
+		if o=='--abort-less-than':
+			abortLessThan=int(v)
 	
 	try:
 		misoFileDir, events2TranscriptExonStringColFile, outputMISODir=args
