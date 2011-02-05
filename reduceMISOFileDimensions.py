@@ -101,6 +101,7 @@ Index			Excel			Field
 from sys import *
 import os.path
 import os
+from getopt import getopt
 
 def parseMISOFile(filename):
 	#return (sampled_psi[exonString][MISORow]=float,logScore[MISORow]=float)
@@ -159,12 +160,15 @@ python reduceMISOFileDimensions.py $misoFileDir $events2TranscriptExonStringColF
 
 
 def printUsageAndExit(programName):
-	print >> stderr,"Usage:",programName,"misoFileDir events2TranscriptExonStringColFile outputMISODir"
+	print >> stderr,"Usage:",programName,"[--abort-less-than default:100] misoFileDir events2TranscriptExonStringColFile outputMISODir"
 	exit()
 
 if __name__=='__main__':
 	programName=argv[0]
-	args=argv[1:]
+	opts,args=getopt(argv[1:],'',['abort-less-than'])
+	
+	abortLessThan=100
+	
 	try:
 		misoFileDir, events2TranscriptExonStringColFile, outputMISODir=args
 	except:
@@ -223,6 +227,8 @@ if __name__=='__main__':
 				os.makedirs(outputMISOPath)
 			outputMISOFileName=outputMISOPath+"/"+eventID+".miso"
 			
+			numValidLines=0
+			numInvalidLines=0
 			
 			eventIsoforms=[]
 			eventIDIsoformIdxKeys=eventStruct.keys()
@@ -245,6 +251,9 @@ if __name__=='__main__':
 			
 			print >> foutputMISO,"sampled_psi\tlog_score"
 			
+			sampled_psi_ave=dict()
+			log_score_ave=0.0
+			
 			for miso_row in range(0,len(log_score)):
 				sampled_psi_out=[]
 				isoform_cpsi=[]
@@ -263,15 +272,53 @@ if __name__=='__main__':
 					ccpsi+=cpsi
 				
 				if ccpsi==0.0:
+					numInvalidLines+=1
 					continue
 				
+				idxx=0
+				
+				numValidLines+=1
+				
 				for cpsi in isoform_cpsi:
-					sampled_psi_out.append(str(cpsi/ccpsi))
+					norm_psi=cpsi/ccpsi
+					sampled_psi_out.append(str(norm_psi))
+					if numInvalidLines==1:
+						sampled_psi_ave.append(norm_psi)
+					else:	
+						sampled_psi_ave[idxx]+=norm_psi
+					idxx+=1
+				
+				
+				thislogscore=log_score[miso_row]
+				log_score_ave+=float(thislogscore)
 			
 				sampled_psi_out=",".join(sampled_psi_out)
-				print >> foutputMISO,sampled_psi_out+"\t"+log_score[miso_row]
+				print >> foutputMISO,sampled_psi_out+"\t"+thislogscore
 	
-			foutputMISO.close()
+			
+			
+			if numValidLines<abortLessThan:
+				#delete this file:
+				foutputMISO.close()
+				os.remove(outputMISOFileName)
+			else:
+				#now calculate the average and fill up
+				if numInvalidLines>0:
+					for i in range(0,len(sampled_psi_ave)):
+						sampled_psi_ave[i]=str(sampled_psi_ave[i]/numValidLines)
+					
+					log_score_ave=str(log_score_ave/numValidLines)
+					outline=",".join(sampled_psi_ave)+"\t"+log_score_ave
+					
+					for i in range(0,numInvalidLines):
+						print >> foutputMISO,outline
+					
+					print >> stderr,"fill", numInvalidLines,"invalid rows with average for file",outputMISOFileName
+				
+				
+				foutputMISO.close()
+			
+			
 			
 				
 
