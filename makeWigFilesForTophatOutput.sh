@@ -57,10 +57,9 @@ fi
 
 #now let's make a track header
 #if [ ! -e accepted_hits.sorted.bam.flagstat ]; then
-samtools flagstat accepted_hits.sorted.bam > accepted_hits.sorted.bam.flagstat
+
 #fi
 
-numOfReads=`awk -v FS=" " '{if(FNR==4 && $2=="mapped"){printf("%s\n",$1);}}' accepted_hits.sorted.bam.flagstat`
 
 if [[ $HttpAddress != "" ]]; then
 tmName=`mktemp`
@@ -68,6 +67,8 @@ randSuffix=`basename $tmName`
 fi
 
 if [ -e coverage.wig ]; then
+    samtools flagstat accepted_hits.sorted.bam > accepted_hits.sorted.bam.flagstat
+    numOfReads=`awk -v FS=" " '{if(FNR==4 && $2=="mapped"){printf("%s\n",$1);}}' accepted_hits.sorted.bam.flagstat`
 	echo "coverage.wig exists. Using it"
 awk -v FS="\t" -v OFS="\t" -v numOfReads=$numOfReads '{if(FNR>1 && $2<$3 ){$4=$4*1000000.0/numOfReads; print;}}' coverage.wig > ${sampleName}.RPM.wig
 else
