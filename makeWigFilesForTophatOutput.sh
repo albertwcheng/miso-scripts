@@ -67,7 +67,13 @@ tmName=`mktemp`
 randSuffix=`basename $tmName`
 fi
 
+if [ -e coverage.wig ]; then
+	echo "coverage.wig exists. Using it"
 awk -v FS="\t" -v OFS="\t" -v numOfReads=$numOfReads '{if(FNR>1 && $2<$3 ){$4=$4*1000000.0/numOfReads; print;}}' coverage.wig > ${sampleName}.RPM.wig
+else
+	echo "coverage.wig does not exist. Use bam2Wig"
+	bam2Wig --no-header --no-comment --rpm-auto accepted_hits.sorted.bam > ${sampleName}.RPM.wig
+fi
 
 if [[ $HttpAddress != "" ]]; then
 bedGraphToBigWig  ${sampleName}.RPM.wig $genomeSizes ${sampleName}.RPM.wig.bw
@@ -82,7 +88,11 @@ gzip -f ${sampleName}.RPM.wig
 
 
 #log2(x+1)
-awk -v FS="\t" -v OFS="\t" -v numOfReads=$numOfReads 'BEGIN{logb=log(2)}{if(FNR>1 && $2<$3 ){$4=log($4*1000000.0/numOfReads+1)/logb; print;}}' coverage.wig > ${sampleName}.RPM.l2x1.wig
+if [ -e coverage.wig ]; then
+	awk -v FS="\t" -v OFS="\t" -v numOfReads=$numOfReads 'BEGIN{logb=log(2)}{if(FNR>1 && $2<$3 ){$4=log($4*1000000.0/numOfReads+1)/logb; print;}}' coverage.wig > ${sampleName}.RPM.l2x1.wig
+else
+	bam2Wig --no-header --no-comment --rpm-auto --log 2 accepted_hits.sorted.bam > ${sampleName}.RPM.l2x1.wig
+fi
 
 if [[ $HttpAddress != "" ]]; then
 bedGraphToBigWig  ${sampleName}.RPM.l2x1.wig $genomeSizes ${sampleName}.RPM.l2x1.wig.bw
