@@ -67,17 +67,24 @@ randSuffix=`basename $tmName`
 fi
 
 if [ -e coverage.wig ]; then
+	bedGraphUsed=1
     samtools flagstat accepted_hits.sorted.bam > accepted_hits.sorted.bam.flagstat
     numOfReads=`awk -v FS=" " '{if(FNR==4 && $2=="mapped"){printf("%s\n",$1);}}' accepted_hits.sorted.bam.flagstat`
 	echo "coverage.wig exists. Using it"
 awk -v FS="\t" -v OFS="\t" -v numOfReads=$numOfReads '{if(FNR>1 && $2<$3 ){$4=$4*1000000.0/numOfReads; print;}}' coverage.wig > ${sampleName}.RPM.wig
 else
+	bedGraphUsed=0
 	echo "coverage.wig does not exist. Use bam2Wig"
 	bam2Wig --no-header --no-comment --rpm-auto accepted_hits.sorted.bam > ${sampleName}.RPM.wig
 fi
 
 if [[ $HttpAddress != "" ]]; then
-bedGraphToBigWig  ${sampleName}.RPM.wig $genomeSizes ${sampleName}.RPM.wig.bw
+	if [[ $bedGraphUsed == 1 ]]; then
+		bedGraphToBigWig  ${sampleName}.RPM.wig $genomeSizes ${sampleName}.RPM.wig.bw
+	else
+		wigToBigWig  ${sampleName}.RPM.wig $genomeSizes ${sampleName}.RPM.wig.bw
+	fi
+
 rm -f $bigWigOutputDir/${sampleName}-*.RPM.wig.bw
 mv ${sampleName}.RPM.wig.bw $bigWigOutputDir/${sampleName}-${randSuffix}.RPM.wig.bw
 echo "track type=bigWig name=\"$sampleName.RPM\" description=\"RPM of $sampleName\" bigDataUrl=$HttpAddress/${sampleName}-${randSuffix}.RPM.wig.bw visibility=Full color=$thisColor alwaysZero=On" > $sampleName.RPM.bwlink.wig
@@ -96,7 +103,12 @@ else
 fi
 
 if [[ $HttpAddress != "" ]]; then
-bedGraphToBigWig  ${sampleName}.RPM.l2x1.wig $genomeSizes ${sampleName}.RPM.l2x1.wig.bw
+	if [[ $bedGraphUsed == 1 ]]; then
+		bedGraphToBigWig  ${sampleName}.RPM.l2x1.wig $genomeSizes ${sampleName}.RPM.l2x1.wig.bw
+	else
+		wigToBigWig  ${sampleName}.RPM.l2x1.wig $genomeSizes ${sampleName}.RPM.l2x1.wig.bw
+	fi
+	
 rm -f  $bigWigOutputDir/${sampleName}-*.RPM.l2x1.wig.bw
 mv ${sampleName}.RPM.l2x1.wig.bw $bigWigOutputDir/${sampleName}-${randSuffix}.RPM.l2x1.wig.bw
 echo "track type=bigWig name=\"$sampleName.log2(RPM+1)\" description=\"log2(RPM+1) of $sampleName\" bigDataUrl=$HttpAddress/${sampleName}-${randSuffix}.RPM.l2x1.wig.bw visibility=Full color=$thisColor alwaysZero=On" > $sampleName.RPM.l2x1.bwlink.wig
