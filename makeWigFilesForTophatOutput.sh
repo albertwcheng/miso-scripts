@@ -40,7 +40,7 @@ sampleI=`expr $sampleI + 1`
 
 sampleName=`basename $sampleDir`
 
-if [ ! -e $sampleDir/accepted_hits.sorted.bam ];  then
+if [ ! -e $sampleDir/accepted_hits.sorted.bam ] && [ ! -e $sampleDir/coverage.wig ];  then
 	continue
 fi
 
