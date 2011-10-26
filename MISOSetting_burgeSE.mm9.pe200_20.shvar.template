@@ -1,0 +1,43 @@
+
+
+genome=mm9 ###
+typeAnno=burge ###
+#MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
+MISOPATH=/lab/jaenisch_albert/bin/newMISO/MISO/
+
+genomeRootDir=/lab/jaenisch_albert/genomes/
+
+genomeSizes=${genomeRootDir}/${genome}/${genome}_nr.sizes
+#eventGff=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents #####
+eventGff=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/pickled/SE
+#rawGffFile=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents.pe.gff #######
+rawGffFiles=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/SE.mm9.gff3
+
+
+targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
+readLen=100 ###
+pairedEndFlag="--paired-end 200 20"  #mean sd 
+clusterFlag="--use-cluster --chunk-jobs 1000"
+bamFileSubRoot=tophatOutput
+MISOOutSubRoot=MISOOnPE_burgeSE
+
+misoRunSetting=miso_settings_burgeEvents.txt
+
+splidarEventTypes[0]="SE"
+splidarEventTypes[1]="MXE"
+splidarEventTypes[2]="RI"
+splidarEventTypes[3]="A5SS"
+splidarEventTypes[4]="A3SS"
+splidarEventTypes[5]="AFE"
+splidarEventTypes[6]="ALE"
+splidarEventTypes[7]="A3UTR"
+
+bfThresholds[0]=5
+bfThresholds[1]=20
+bfThresholds[2]=100
+
+dPsiCutOffs[0]=0.1
+dPsiCutOffs[1]=0.2
+dPsiCutOffs[2]=0.3
+dPsiCutOffs[3]=0.5
+
