@@ -20,7 +20,7 @@ cd ..
 
 rootDir=`pwd`
 
-cd $MISOPATH 
+#cd $MISOPATH #run_event_analysis.py is now assumed to be in path
 
 tophatOutputDir=$rootDir/$bamFileSubRoot
 MISOOutputDir=$rootDir/${MISOOutSubRoot}/MISOOutput
@@ -38,9 +38,11 @@ if [ ! -e $sampleDir/${targetBamFileBaseName} ];  then
 	continue
 fi
 
+#run_events_analysis.py --settings-filename /lab/solexa_jaenisch/Albert2/Lei/4AlbertFiltered/miso-scripts/miso_settings_burgeEvents.txt --compute-genes-psi /lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/pickled/SE /lab/solexa_jaenisch/Albert2/Lei/4AlbertFiltered/tophatOutput/pBAT/accepted_hits.sorted.bam --output-dir $outdir/pBAT --read-len 100 --paired-end 200 20 
+
 mkdir $MISOOutputDir/$sampleName
 #pwd
-command="python run_events_analysis.py --settings-filename $misoRunSetting --compute-genes-psi ${eventGff} $sampleDir/${targetBamFileBaseName} --output-dir $MISOOutputDir/$sampleName --read-len $readLen $pairedEndFlag $clusterFlag > $MISOOutputDir/$sampleName/run_events_analysis.stdout 2> $MISOOutputDir/$sampleName/run_events_analysis.stderr"
+command="run_events_analysis.py --settings-filename $misoRunSetting --compute-genes-psi ${eventGff} $sampleDir/${targetBamFileBaseName} --output-dir $MISOOutputDir/$sampleName --read-len $readLen $pairedEndFlag $clusterFlag > $MISOOutputDir/$sampleName/run_events_analysis.stdout 2> $MISOOutputDir/$sampleName/run_events_analysis.stderr"
 
 echo $command > $MISOOutputDir/$sampleName/qsub.sh
 bsub bash $MISOOutputDir/$sampleName/qsub.sh

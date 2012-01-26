@@ -3,7 +3,7 @@
 genome=mm9 ###
 typeAnno=burge ###
 #MISOPATH=/lab/jaenisch_albert/Apps/yarden/MixtureIsoforms/
-MISOPATH=/lab/jaenisch_albert/bin/newMISO/MISO/
+#MISOPATH=/lab/jaenisch_albert/bin/newMISO/MISO/
 
 genomeRootDir=/lab/jaenisch_albert/genomes/
 
@@ -17,7 +17,7 @@ rawGffFiles=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/SE.mm9.gff3
 targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
 readLen=100 ###
 pairedEndFlag="--paired-end 200 20"  #mean sd 
-clusterFlag="--use-cluster --chunk-jobs 1000"
+clusterFlag="" #fastmiso no more using these flags?? --use-cluster --chunk-jobs 1000
 bamFileSubRoot=tophatOutput
 MISOOutSubRoot=MISOOnPE_burgeSE
 

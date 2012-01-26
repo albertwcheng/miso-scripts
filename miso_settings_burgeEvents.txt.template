@@ -1,0 +1,11 @@
+[data]
+filter_results = True
+min_event_reads = 15
+
+[cluster]
+cluster_command = bsub
+
+[sampler]
+burn_in = 500
+lag = 10
+num_iters = 5000
