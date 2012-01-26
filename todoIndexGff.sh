@@ -20,6 +20,6 @@ cd ..
 
 rootDir=`pwd`
 
-cd $MISOPATH 
-
-python index_gff.py --index $rawGffFile $eventGff
+#cd $MISOPATH 
+echo index_gff.py --index $rawGffFile $eventGff
+index_gff.py --index $rawGffFile $eventGff #python -> use installed miso

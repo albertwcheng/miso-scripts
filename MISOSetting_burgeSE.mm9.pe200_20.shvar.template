@@ -11,13 +11,13 @@ genomeSizes=${genomeRootDir}/${genome}/${genome}_nr.sizes
 #eventGff=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents #####
 eventGff=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/pickled/SE
 #rawGffFile=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents.pe.gff #######
-rawGffFiles=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/SE.mm9.gff3
+rawGffFile=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/SE.mm9.gff3
 
 
 targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
 readLen=100 ###
 pairedEndFlag="--paired-end 200 20"  #mean sd 
-clusterFlag="" #fastmiso no more using these flags?? --use-cluster --chunk-jobs 1000
+clusterFlag="--use-cluster --chunk-jobs 600" #fastmiso no more using these flags?? --use-cluster --chunk-jobs 1000
 bamFileSubRoot=tophatOutput
 MISOOutSubRoot=MISOOnPE_burgeSE
 
