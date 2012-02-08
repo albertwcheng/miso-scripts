@@ -61,10 +61,10 @@ mkdir $misoSummaryDirPerSample
 rm -f $misoOutputDirPerSample/summarize_samples.std*
 rm -f $misoSummaryDirPerSample/summarize_samples.std*
 
-for prevOut in $misoOutputDirPerSample/*.std*; do
-	bn=`basename $prevOut`
-	mv $prevOut $MISOOutputDir/$sampleName.$bn
-done
+#for prevOut in $misoOutputDirPerSample/*.std*; do
+#	bn=`basename $prevOut`
+#	mv $prevOut $MISOOutputDir/$sampleName.$bn
+#done
 
 rm -Rf $misoSummaryDirPerSample/summary
 rm -Rf $misoOutputDirPerSample/summary
