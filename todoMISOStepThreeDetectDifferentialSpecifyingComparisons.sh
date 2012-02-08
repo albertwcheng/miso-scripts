@@ -2,6 +2,7 @@
 
 if [ $# -ne 2 ]; then
 	echo $0 MISOSettingFile "mode[normal|reduced]"
+	echo "in MISOSettingFile specify COMPARISON_SAMPLEX and COMPARISON_SAMPLEY as arrays of comparison X[1] vs Y[1], .. X[n] vs Y[n]"
 	exit
 fi
 
@@ -46,14 +47,18 @@ mkdir $MISOComparisonsDir
 
 # differential, all pairwise, all directions
 
-for sampleDirx in $tophatOutputDir/*; do
-sampleNamex=`basename $sampleDirx`
-for sampleDiry in $tophatOutputDir/*; do
-sampleNamey=`basename $sampleDiry`
 
-if [[ $sampleNamex == $sampleNamey ]]; then
-	continue
-fi
+for sampleNamex in COMPARISON_SAMPLEX; do
+for sampleNamey in COMPARISON_SAMPLEY; do
+
+##for sampleDirx in $tophatOutputDir/*; do
+#sampleNamex=`basename $sampleDirx`
+#for sampleDiry in $tophatOutputDir/*; do
+##sampleNamey=`basename $sampleDiry`
+
+#if [[ $sampleNamex == $sampleNamey ]]; then
+#	continue
+#fi
 
 echo "trying to compare sample $sampleNamex and $sampleNamey"
 
