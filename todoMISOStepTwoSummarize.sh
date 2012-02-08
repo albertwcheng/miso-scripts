@@ -69,7 +69,7 @@ done
 rm -Rf $misoSummaryDirPerSample/summary
 rm -Rf $misoOutputDirPerSample/summary
 
-python run_miso.py --settings-filename $misoRunSetting  --summarize-samples $misoOutputDirPerSample $misoSummaryDirPerSample > $misoSummaryDirPerSample/summarize_samples.stdout 2> $misoSummaryDirPerSample/summarize_samples.stderr
+run_miso.py --settings-filename $misoRunSetting  --summarize-samples $misoOutputDirPerSample $misoSummaryDirPerSample > $misoSummaryDirPerSample/summarize_samples.stdout 2> $misoSummaryDirPerSample/summarize_samples.stderr
 
 done
 
