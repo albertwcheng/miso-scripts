@@ -13,6 +13,9 @@ eventGff=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/pickled/SE
 #rawGffFile=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents.pe.gff #######
 rawGffFile=/lab/jaenisch_albert/genomes/mm9/burgeLabEvents/mm9/SE.mm9.gff3
 
+constExonGff=/lab/solexa_jaenisch/jaenisch_albert/genomes/mm9/burgeLabEvents/const_exons/exons.chrSN/Mus_musculus.NCBIM37.65.chrSN.min_1000.const_exons.gff
+
+
 
 targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
 readLen=100 ###
