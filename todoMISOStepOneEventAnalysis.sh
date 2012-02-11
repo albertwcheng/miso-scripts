@@ -30,6 +30,13 @@ MISOSummaryDir=$rootDir/${MISOOutSubRoot}/MISOSummary
 mkdir $rootDir/${MISOOutSubRoot}
 mkdir $MISOOutputDir
 
+
+if [[ $readLen == "" ]]; then
+	echo "readLen not specified. Abort"
+	exit 1
+fi
+
+
 for sampleDir in $tophatOutputDir/*; do
 
 sampleName=`basename $sampleDir`
@@ -42,6 +49,28 @@ fi
 
 mkdir $MISOOutputDir/$sampleName
 #pwd
+
+if [[ $useInsertLenStat == "yes" ]]; then
+	if [ ! -e $sampleDir/insert-dist/$targetBamFileBaseName.insert_len.shvar ]; then
+		echo "insert_len.shvar not exist for sample $sampleDir. Abort"
+		echo "compute these using first todoMISOStepZeroInsertLengthDist.sh and then todoMISOStepPostZeroInsertLengthDistSummarize.sh"
+		exit 1
+	fi
+	
+	source $sampleDir/insert-dist/$targetBamFileBaseName.insert_len.shvar
+	
+	#now form the paired end flag
+	
+	echo using paired-end flag mean=$mean sdev=$sdev for sample $sampleName
+	
+	pairedEndFlag="--paired-end $mean $sdev"
+	
+	#continue
+fi
+
+
+
+
 command="run_events_analysis.py --settings-filename $misoRunSetting --compute-genes-psi ${eventGff} $sampleDir/${targetBamFileBaseName} --output-dir $MISOOutputDir/$sampleName --read-len $readLen $pairedEndFlag $clusterFlag > $MISOOutputDir/$sampleName/run_events_analysis.stdout 2> $MISOOutputDir/$sampleName/run_events_analysis.stderr"
 
 echo $command > $MISOOutputDir/$sampleName/qsub.sh
