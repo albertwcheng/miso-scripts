@@ -10,17 +10,19 @@ genomeSizes=${genomeRootDir}/${genome}/${genome}_nr.sizes
 eventGff=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents #####
 rawGffFile=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents.pe.gff #######
 
+constExonGff=/lab/solexa_jaenisch/jaenisch_albert/genomes/mm9/burgeLabEvents/const_exons/exons.chrSN/Mus_musculus.NCBIM37.65.chrSN.min_1000.const_exons.gff
+
+
 targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
 readLen= ###
 
-pairedEndFlag="--paired-end 200 20"  #mean sd 
 
 
-clusterFlag="--use-cluster --chunk-jobs 1000"
+clusterFlag="--use-cluster --chunk-jobs 600"
 bamFileSubRoot=tophatOutput
 MISOOutSubRoot=MISOOnPE_splidarEvents
 
-misoRunSetting=miso_settings_splidarEvents.txt
+misoRunSetting=miso_settings_burgeEvents.txt #use the same setting as burge events
 
 splidarEventTypes[0]="SE"
 splidarEventTypes[1]="MXE"
