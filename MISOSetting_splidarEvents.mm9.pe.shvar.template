@@ -11,6 +11,7 @@ eventGff=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents #####
 rawGffFile=/lab/jaenisch_albert/genomes/mm9/SplidarEventGff/allEvents.pe.gff #######
 
 constExonGff=/lab/solexa_jaenisch/jaenisch_albert/genomes/mm9/burgeLabEvents/const_exons/exons.chrSN/Mus_musculus.NCBIM37.65.chrSN.min_1000.const_exons.gff
+useInsertLenStat=yes
 
 
 targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
