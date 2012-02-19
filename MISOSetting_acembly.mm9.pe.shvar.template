@@ -1,0 +1,34 @@
+genome=mm9 ###
+typeAnno=acembly ###
+
+
+genomeRootDir=/lab/jaenisch_albert/genomes/
+
+genomeSizes=${genomeRootDir}/${genome}/${genome}_nr.sizes
+eventGff=${genomeRootDir}/${genome}/annos/${typeAnno} ###
+rawGffFile=${genomeRootDir}/${genome}/annos/${typeAnno}.pe.gff3 ##
+rawEbedFile=${genomeRootDir}/${genome}/annos/${typeAnno}.ebed  ###
+
+targetBamFileBaseName=accepted_hits.sorted.bam  ### use the sorted one?
+readLen= ###
+
+  
+clusterFlag="--use-cluster --chunk-jobs 600"
+bamFileSubRoot=tophatOutput
+MISOOutSubRoot=MISOOnPE_acembly
+
+misoRunSetting=miso_settings_acembly.txt
+
+bfThresholds[0]=5
+bfThresholds[1]=20
+bfThresholds[2]=100
+
+
+constExonGff=/lab/solexa_jaenisch/jaenisch_albert/genomes/mm9/burgeLabEvents/const_exons/exons.chrSN/Mus_musculus.NCBIM37.65.chrSN.min_1000.const_exons.gff
+useInsertLenStat=yes
+
+
+dPsiCutOffs[0]=0.1
+dPsiCutOffs[1]=0.2
+dPsiCutOffs[2]=0.3
+dPsiCutOffs[3]=0.5
