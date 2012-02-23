@@ -73,6 +73,12 @@ mode=$2
 
 source ${MISOSettingFile}
 
+if [[ $splidarInfoFile == "" ]]; then 
+	echo splidarInfoFile not set. Abort
+	exit 1
+fi
+
+
 thisScriptDir=`pwd`
 
 cd ..
@@ -100,6 +106,9 @@ fi
 for sampleDir in $tophatOutputDir/*; do
 
 sampleName=`basename $sampleDir`
+
+
+
 
 if [ ! -e $sampleDir/${targetBamFileBaseName} ];  then
 	continue
@@ -130,10 +139,18 @@ stickColValues.py --internalfs "," ${sampleName}.miso_summary.isoforms.dissociat
 
 joinu.py -1.isoforms -2.isoforms ${sampleName}.miso_summary.dq ${sampleName}.miso_summary.isoforms.2transcriptName > ${sampleName}.miso_summary.2transcriptName
 
+
+rmrie.sh ${sampleName}.miso_summary.splidarEvents.00
 python $thisScriptDir/correctMISOForSplidarEvents.py ${sampleName}.miso_summary.2transcriptName > ${sampleName}.miso_summary.splidarEvents.00
 
+joinu.py -1 .eventIDString -2 .eventIDString $splidarInfoFile ${sampleName}.miso_summary.splidarEvents.00 > ${sampleName}.miso_summary.splidarEvents.full
+
+echo "Checking reverse join on splidarInfo. Should have no unmatched lines"
+joinu.py -w 2 -1 .eventIDString -2 .eventIDString  ${sampleName}.miso_summary.splidarEvents.00 $splidarInfoFile > /dev/null #making sure
+echo "End of checking"
+
 #now trim the unwnated fields
-cuta.py -f.eventIDString,.miso_posterior_mean,.ci_low,.ci_high ${sampleName}.miso_summary.splidarEvents.00 > ${sampleName}.miso_summary.splidarEvents.tab
+cuta.py -f.eventIDString,.eventType,.eventID,.locusName,.chr,.strand,.inc/excBound,.UCSCGenomeBrowser,.miso_posterior_mean,.ci_low,.ci_high ${sampleName}.miso_summary.splidarEvents.full > ${sampleName}.miso_summary.splidarEvents.tab
 
 cd $rootDir
 
@@ -171,8 +188,10 @@ joinu.py -1.isoforms -2.isoforms ${i}.dq ${i}.isoforms.2transcriptName > ${i}.2t
 
 python $thisScriptDir/correctMISOForSplidarEvents.py ${i}.2transcriptName > ${i}.splidarEvents.00
 
+joinu.py -1 .eventIDString -2 .eventIDString $splidarInfoFile ${i}.splidarEvents.00 > ${i}.splidarEvents.full
+
 #now trim the unwnated fields
-cuta.py -f.eventIDString,.sample1_posterior_mean,.sample1_ci_low,.sample1_ci_high,.sample2_posterior_mean,.sample2_ci_low,.sample2_ci_high,.diff,.bayes_factor ${i}.splidarEvents.00 > ${i}.splidarEvents.tab
+cuta.py -f.eventIDString,.eventType,.eventID,.locusName,.chr,.strand,.inc/excBound,.UCSCGenomeBrowser,.sample1_posterior_mean,.sample1_ci_low,.sample1_ci_high,.sample2_posterior_mean,.sample2_ci_low,.sample2_ci_high,.diff,.bayes_factor ${i}.splidarEvents.full > ${i}.splidarEvents.tab
 
 
 done
