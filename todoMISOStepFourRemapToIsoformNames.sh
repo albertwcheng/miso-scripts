@@ -116,6 +116,8 @@ fi
 
 cd $MISOSummaryDir/$sampleName/summary
 
+echo working on summary for sample $sampleName
+
 #first remove all the quote marks
 dequote.sh ${sampleName}.miso_summary > ${sampleName}.miso_summary.dq
 
@@ -145,7 +147,7 @@ python $thisScriptDir/correctMISOForSplidarEvents.py ${sampleName}.miso_summary.
 
 joinu.py -1 .eventIDString -2 .eventIDString $splidarInfoFile ${sampleName}.miso_summary.splidarEvents.00 > ${sampleName}.miso_summary.splidarEvents.full
 
-echo "Checking reverse join on splidarInfo. Should have no unmatched lines"
+echo "Checking reverse join on splidarInfo. Should have no unmatched lines ${sampleName}.miso_summary.splidarEvents.00 against $splidarInfoFile"
 joinu.py -w 2 -1 .eventIDString -2 .eventIDString  ${sampleName}.miso_summary.splidarEvents.00 $splidarInfoFile > /dev/null #making sure
 echo "End of checking"
 
@@ -163,7 +165,7 @@ if [ -e $MISOComparisonsDir ]; then
 
 for i in $MISOComparisonsDir/*/*/bayes-factors/*.miso_bf; do
 
-
+echo working on comparison file $i
 #these are copied from above but modifying ${sampleName}.miso_summary to ${i}
 
 dequote.sh ${i} > ${i}.dq
