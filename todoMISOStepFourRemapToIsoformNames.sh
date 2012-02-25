@@ -190,7 +190,13 @@ joinu.py -1.isoforms -2.isoforms ${i}.dq ${i}.isoforms.2transcriptName > ${i}.2t
 
 python $thisScriptDir/correctMISOForSplidarEvents.py ${i}.2transcriptName > ${i}.splidarEvents.00
 
-joinu.py -1 .eventIDString -2 .eventIDString $splidarInfoFile ${i}.splidarEvents.00 > ${i}.splidarEvents.full
+tpf=`tempfile`
+
+joinu.py -1 .eventIDString -2 .eventIDString $splidarInfoFile ${i}.splidarEvents.00 | splitlines.py - 1 ${i}.splidarEvents.full,$tpf
+
+colBayesFactor=`colSelect.py ${i}.splidarEvents.full .bayes_factor`
+
+sort -k$colBayesFactor,$colBayesFactor -t$'\t' -g -r $tpf >> ${i}.splidarEvents.full
 
 #now trim the unwnated fields
 cuta.py -f.eventIDString,.eventType,.eventID,.locusName,.chr,.strand,.inc/excBound,.UCSCGenomeBrowser,.sample1_posterior_mean,.sample1_ci_low,.sample1_ci_high,.sample2_posterior_mean,.sample2_ci_low,.sample2_ci_high,.diff,.bayes_factor ${i}.splidarEvents.full > ${i}.splidarEvents.tab
