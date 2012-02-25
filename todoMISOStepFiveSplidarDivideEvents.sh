@@ -75,15 +75,26 @@ parentDir=`absdirname.py $misobfFilename` #/lab/solexa_jaenisch4/Albert/mRNASeqL
 		eventIDStringCol=`colSelect.py ${misobfFilename} .eventIDString`
 		dPsiCol=`colSelect.py ${misobfFilename} .diff`
 		bayesFactorCol=`colSelect.py ${misobfFilename} .bayes_factor`
+
+		misobfFilenameFull=${misobfFilename/.tab/}.full
+		eventIDStringColFull=`colSelect.py ${misobfFilenameFull} .eventIDString`
+		dPsiColFull=`colSelect.py ${misobfFilenameFull} .diff`
+		bayesFactorColFull=`colSelect.py ${misobfFilenameFull} .bayes_factor`
 		
 		awk -v FS="\t" -v OFS="\t" -v eventType=${splidarEventType} -v eventIDStringCol=$eventIDStringCol -v dPsiCol=$dPsiCol -v dPsiCutOff=0.0 -v bayesFactorCol=$bayesFactorCol -v bfThreshold=0.0 'function abs(x){if(x<0){return -x;}return x;}{split($eventIDStringCol,a,"."); if((a[1]==eventType && abs($dPsiCol)>=dPsiCutOff && $bayesFactorCol>=bfThreshold )  || FNR==1){print;}}' ${misobfFilename} > ${thisEventTypeFolder}/${comparisonName}.${splidarEventType}.miso_bf.splidarEvents.tab
+		
+		awk -v FS="\t" -v OFS="\t" -v eventType=${splidarEventType} -v eventIDStringCol=$eventIDStringColFull -v dPsiCol=$dPsiColFull -v dPsiCutOff=0.0 -v bayesFactorCol=$bayesFactorColFull -v bfThreshold=0.0 'function abs(x){if(x<0){return -x;}return x;}{split($eventIDStringCol,a,"."); if((a[1]==eventType && abs($dPsiCol)>=dPsiCutOff && $bayesFactorCol>=bfThreshold )  || FNR==1){print;}}' $misobfFilenameFull > ${thisEventTypeFolder}/${comparisonName}.${splidarEventType}.miso_bf.splidarEvents.full
 		
 		for bfThreshold in ${bfThresholds[@]}; do
 			awk -v FS="\t" -v OFS="\t" -v eventType=${splidarEventType} -v eventIDStringCol=$eventIDStringCol -v dPsiCol=$dPsiCol -v dPsiCutOff=0.0 -v bayesFactorCol=$bayesFactorCol -v bfThreshold=${bfThreshold} 'function abs(x){if(x<0){return -x;}return x;}{split($eventIDStringCol,a,"."); if((a[1]==eventType && abs($dPsiCol)>=dPsiCutOff && $bayesFactorCol>=bfThreshold )  || FNR==1){print;}}' ${misobfFilename} > ${thisEventTypeFolder}/${comparisonName}.${splidarEventType}.bf${bfThreshold}.miso_bf.splidarEvents.tab
 			
-			for dPsiCutOff in ${dPsiCutOffs[@]}; do
-				awk -v FS="\t" -v OFS="\t" -v eventType=${splidarEventType} -v eventIDStringCol=$eventIDStringCol -v dPsiCol=$dPsiCol -v dPsiCutOff=${dPsiCutOff} -v bayesFactorCol=$bayesFactorCol -v bfThreshold=${bfThreshold} 'function abs(x){if(x<0){return -x;}return x;}{split($eventIDStringCol,a,"."); if((a[1]==eventType && abs($dPsiCol)>=dPsiCutOff && $bayesFactorCol>=bfThreshold )  || FNR==1){print;}}' ${misobfFilename} > ${thisEventTypeFolder}/${comparisonName}.${splidarEventType}.bf${bfThreshold}.dPsi${dPsiCutOff}.miso_bf.splidarEvents.tab			
+			awk -v FS="\t" -v OFS="\t" -v eventType=${splidarEventType} -v eventIDStringCol=$eventIDStringColFull -v dPsiCol=$dPsiColFull -v dPsiCutOff=0.0 -v bayesFactorCol=$bayesFactorColFull -v bfThreshold=${bfThreshold} 'function abs(x){if(x<0){return -x;}return x;}{split($eventIDStringCol,a,"."); if((a[1]==eventType && abs($dPsiCol)>=dPsiCutOff && $bayesFactorCol>=bfThreshold )  || FNR==1){print;}}' $misobfFilenameFull > ${thisEventTypeFolder}/${comparisonName}.${splidarEventType}.bf${bfThreshold}.miso_bf.splidarEvents.full
 			
+			for dPsiCutOff in ${dPsiCutOffs[@]}; do
+				awk -v FS="\t" -v OFS="\t" -v eventType=${splidarEventType} -v eventIDStringCol=$eventIDStringCol -v dPsiCol=$dPsiCol -v dPsiCutOff=${dPsiCutOff} -v bayesFactorCol=$bayesFactorCol -v bfThreshold=${bfThreshold} 'function abs(x){if(x<0){return -x;}return x;}{split($eventIDStringCol,a,"."); if((a[1]==eventType && abs($dPsiCol)>=dPsiCutOff && $bayesFactorCol>=bfThreshold )  || FNR==1){print;}}' ${misobfFilename} > ${thisEventTypeFolder}/${comparisonName}.${splidarEventType}.bf${bfThreshold}.dPsi${dPsiCutOff}.miso_bf.splidarEvents.tab
+							
+				awk -v FS="\t" -v OFS="\t" -v eventType=${splidarEventType} -v eventIDStringCol=$eventIDStringColFull -v dPsiCol=$dPsiColFull -v dPsiCutOff=${dPsiCutOff} -v bayesFactorCol=$bayesFactorColFull -v bfThreshold=${bfThreshold} 'function abs(x){if(x<0){return -x;}return x;}{split($eventIDStringCol,a,"."); if((a[1]==eventType && abs($dPsiCol)>=dPsiCutOff && $bayesFactorCol>=bfThreshold )  || FNR==1){print;}}' $misobfFilenameFull > ${thisEventTypeFolder}/${comparisonName}.${splidarEventType}.bf${bfThreshold}.dPsi${dPsiCutOff}.miso_bf.splidarEvents.full
+				
 			done
 		
 		done
