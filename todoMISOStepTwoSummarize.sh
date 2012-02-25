@@ -49,6 +49,10 @@ mkdir $MISOSummaryDir
 
 for sampleDir in $tophatOutputDir/*; do
 
+if [ ! -e $sampleDir/${targetBamFileBaseName} ];  then
+	continue
+fi
+
 sampleName=`basename $sampleDir`
 echo "trying to summarize sample $sampleName"
 
