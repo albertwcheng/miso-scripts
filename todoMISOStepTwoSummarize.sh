@@ -69,7 +69,7 @@ rm -f $misoSummaryDirPerSample/summarize_samples.std*
 rm -Rf $misoSummaryDirPerSample/summary
 rm -Rf $misoOutputDirPerSample/summary
 
-run_miso.py --settings-filename $misoRunSetting  --summarize-samples $misoOutputDirPerSample $misoSummaryDirPerSample > $misoSummaryDirPerSample/summarize_samples.stdout 2> $misoSummaryDirPerSample/summarize_samples.stderr
+echo "run_miso.py --settings-filename $misoRunSetting  --summarize-samples $misoOutputDirPerSample $misoSummaryDirPerSample > $misoSummaryDirPerSample/summarize_samples.stdout 2> $misoSummaryDirPerSample/summarize_samples.stderr" | bsub
 
 done
 
