@@ -21,7 +21,7 @@ cd ..
 
 rootDir=`pwd`
 
-cd $MISOPATH 
+#cd $MISOPATH 
 
 tophatOutputDir=$rootDir/$bamFileSubRoot
 

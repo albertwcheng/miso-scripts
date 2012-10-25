@@ -22,7 +22,7 @@ cd ..
 
 rootDir=`pwd`
 
-cd $MISOPATH 
+#cd $MISOPATH 
 
 tophatOutputDir=$rootDir/$bamFileSubRoot
 
@@ -51,18 +51,8 @@ mkdir $MISOComparisonsDir
 for sampleNamex in COMPARISON_SAMPLEX; do
 for sampleNamey in COMPARISON_SAMPLEY; do
 
-##for sampleDirx in $tophatOutputDir/*; do
-#sampleNamex=`basename $sampleDirx`
-#for sampleDiry in $tophatOutputDir/*; do
-##sampleNamey=`basename $sampleDiry`
-
-#if [[ $sampleNamex == $sampleNamey ]]; then
-#	continue
-#fi
-
 echo "trying to compare sample $sampleNamex and $sampleNamey"
 
-#continue
 
 misoOutputDirPerSamplex=$MISOOutputDir/$sampleNamex
 misoOutputDirPerSampley=$MISOOutputDir/$sampleNamey
@@ -72,15 +62,8 @@ mkdir $misoComparisonsDirPerPairs
 
 rm -f $misoComparisonsDirPerPairs/compare_samples.std*
 
-#for prevOut in $misoComparisonsDirPerPairs/*.std*; do
-#	bn=`basename $prevOut`
-#	mv $prevOut $MISOOutputDir/$sampleName.$bn
-#done
 
-#rm -Rf $misoSummaryDirPerSample/summary
-#rm -Rf $misoOutputDirPerSample/summary
-
-run_miso.py --compare-samples $misoOutputDirPerSamplex $misoOutputDirPerSampley $misoComparisonsDirPerPairs > $misoComparisonsDirPerPairs/compare_samples.stdout 2> $misoComparisonsDirPerPairs/compare_samples.stderr
+echo "run_miso.py --compare-samples $misoOutputDirPerSamplex $misoOutputDirPerSampley $misoComparisonsDirPerPairs > $misoComparisonsDirPerPairs/compare_samples.stdout 2> $misoComparisonsDirPerPairs/compare_samples.stderr" | bsub
 
 done
 done
