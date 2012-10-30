@@ -107,9 +107,6 @@ for sampleDir in $tophatOutputDir/*; do
 
 sampleName=`basename $sampleDir`
 
-
-
-
 if [ ! -e $sampleDir/${targetBamFileBaseName} ];  then
 	continue
 fi
@@ -121,29 +118,14 @@ echo working on summary for sample $sampleName
 #first remove all the quote marks
 dequote.sh ${sampleName}.miso_summary > ${sampleName}.miso_summary.dq
 
-#now extract the isform column
-cuta.py -f.isoforms ${sampleName}.miso_summary.dq | awk -v FS="\t" -v OFS="\t" '{printf("%d\t%s\n",FNR,$0);}' > ${sampleName}.miso_summary.isoforms
-
-#now dissociate
-dissociateColValues.py -i, -s2 ${sampleName}.miso_summary.isoforms > ${sampleName}.miso_summary.isoforms.dissociated
-
 rawGffFileNoExt=${rawGffFile/.gff/}
 rawGffFileNoExt=${rawGffFileNoExt/.GFF/}
 rawGffFileNoExt=${rawGffFileNoExt/.gff3/}
 rawGffFileNoExt=${rawGffFileNoExt/.GFF3/}
 
 
-#now map
-joinu.py -1.isoforms -2.isoforms ${sampleName}.miso_summary.isoforms.dissociated $rawGffFileNoExt.exonStringMap > ${sampleName}.miso_summary.isoforms.dissociated.2transcriptName
-
-#now collapse
-stickColValues.py --internalfs "," ${sampleName}.miso_summary.isoforms.dissociated.2transcriptName 1 | cut -f2,3 > ${sampleName}.miso_summary.isoforms.2transcriptName
-
-joinu.py -1.isoforms -2.isoforms ${sampleName}.miso_summary.dq ${sampleName}.miso_summary.isoforms.2transcriptName > ${sampleName}.miso_summary.2transcriptName
-
-
 rmrie.sh ${sampleName}.miso_summary.splidarEvents.00
-python $thisScriptDir/correctMISOForSplidarEvents.py ${sampleName}.miso_summary.2transcriptName > ${sampleName}.miso_summary.splidarEvents.00
+changeHeaderValueAtCol.sh ${sampleName}.miso_summary.dq 1 eventIDString > ${sampleName}.miso_summary.splidarEvents.00
 
 joinu.py -1 .eventIDString -2 .eventIDString $splidarInfoFile ${sampleName}.miso_summary.splidarEvents.00 > ${sampleName}.miso_summary.splidarEvents.full
 
@@ -170,25 +152,12 @@ echo working on comparison file $i
 
 dequote.sh ${i} > ${i}.dq
 
-cuta.py -f.isoforms ${i}.dq | awk -v FS="\t" -v OFS="\t" '{printf("%d\t%s\n",FNR,$0);}' > ${i}.isoforms
-
-#now dissociate
-dissociateColValues.py -i, -s2 ${i}.isoforms > ${i}.isoforms.dissociated
-
 rawGffFileNoExt=${rawGffFile/.gff/}
 rawGffFileNoExt=${rawGffFileNoExt/.GFF/}
 rawGffFileNoExt=${rawGffFileNoExt/.gff3/}
 rawGffFileNoExt=${rawGffFileNoExt/.GFF3/}
 
-#now map
-joinu.py -1.isoforms -2.isoforms ${i}.isoforms.dissociated $rawGffFileNoExt.exonStringMap > ${i}.isoforms.dissociated.2transcriptName
-
-#now collapse
-stickColValues.py --internalfs "," ${i}.isoforms.dissociated.2transcriptName 1 | cut -f2,3 > ${i}.isoforms.2transcriptName
-
-joinu.py -1.isoforms -2.isoforms ${i}.dq ${i}.isoforms.2transcriptName > ${i}.2transcriptName
-
-python $thisScriptDir/correctMISOForSplidarEvents.py ${i}.2transcriptName > ${i}.splidarEvents.00
+changeHeaderValueAtCol.sh ${i}.dq 1 eventIDString > ${i}.splidarEvents.00
 
 tpf=`tempfile`
 
