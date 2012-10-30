@@ -49,6 +49,8 @@ if __name__=='__main__':
 	psicols=getCol0ListFromCol1ListStringAdv(header,psicols)
 	transcriptcol=getCol0ListFromCol1ListStringAdv(header,transcriptcol)[0]
 	
+	corrected=0
+	
 	fil=open(filename)
 	lino=0
 	for lin in fil:
@@ -72,6 +74,7 @@ if __name__=='__main__':
 				exit()
 			
 			if splidarIsoformFlag=="2": #exclusion-first MISO event cases: flip!
+				corrected+=1
 				for psicol in psicols:
 					fields[psicol]=str(1.0-float(fields[psicol]))
 			
@@ -81,3 +84,5 @@ if __name__=='__main__':
 		print >> stdout,fs.join(fields)
 			
 	fil.close()
+	
+	print >> stderr,"MISO Psi flipped %d times" %(corrected)
