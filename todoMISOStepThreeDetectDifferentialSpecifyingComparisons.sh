@@ -2,7 +2,7 @@
 
 if [ $# -ne 2 ]; then
 	echo $0 MISOSettingFile "mode[normal|reduced]"
-	echo "in MISOSettingFile specify COMPARISON_SAMPLEX and COMPARISON_SAMPLEY as arrays of comparison X[1] vs Y[1], .. X[n] vs Y[n]"
+	echo "in MISOSettingFile specify COMPARISON_SAMPLEX and COMPARISON_SAMPLEY as arrays of comparison X[0] vs Y[0], .. X[n-1] vs Y[n-1]"
 	exit
 fi
 
@@ -69,6 +69,6 @@ rm -f $misoComparisonsDirPerPairs/compare_samples.std*
 echo "run_miso.py --compare-samples $misoOutputDirPerSamplex $misoOutputDirPerSampley $misoComparisonsDirPerPairs > $misoComparisonsDirPerPairs/compare_samples.stdout 2> $misoComparisonsDirPerPairs/compare_samples.stderr" | bsub
 
 done
-done
+
 
 #COMMENT
