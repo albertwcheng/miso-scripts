@@ -170,6 +170,7 @@ sort -k$colBayesFactor,$colBayesFactor -t$'\t' -g -r $tpf >> ${i}.splidarEvents.
 #now trim the unwnated fields
 cuta.py -f.eventIDString,.eventType,.eventID,.locusName,.chr,.strand,.inc/excBound,.UCSCGenomeBrowser,.sample1_posterior_mean,.sample1_ci_low,.sample1_ci_high,.sample2_posterior_mean,.sample2_ci_low,.sample2_ci_high,.diff,.bayes_factor ${i}.splidarEvents.full > ${i}.splidarEvents.tab
 
+python $thisScriptDir/MISOScripts.collapseMISOSplidarEventOnBFAndDiffByEGString.py ${i}.splidarEvents.full ${i}.splidarEvents.full.collapsed
 
 done
 

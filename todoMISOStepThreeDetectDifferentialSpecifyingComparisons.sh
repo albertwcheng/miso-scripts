@@ -47,9 +47,12 @@ mkdir $MISOComparisonsDir
 
 # differential, all pairwise, all directions
 
+for ((i=0;i<${#COMPARISON_SAMPLEX[@]};i++)); do
 
-for sampleNamex in COMPARISON_SAMPLEX; do
-for sampleNamey in COMPARISON_SAMPLEY; do
+sampleNamex=${COMPARISON_SAMPLEX[$i]}
+sampleNamey=${COMPARISON_SAMPLEY[$i]}
+#for sampleNamex in ${COMPARISON_SAMPLEX[@]}; do
+#for sampleNamey in ${COMPARISON_SAMPLEY[@]}; do
 
 echo "trying to compare sample $sampleNamex and $sampleNamey"
 

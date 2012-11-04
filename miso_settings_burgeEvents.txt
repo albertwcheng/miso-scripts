@@ -1,9 +1,9 @@
 [data]
-filter_results = True
-min_event_reads = 15
+filter_results = False #how about false??
+min_event_reads = 5
 
 [cluster]
-cluster_command = bsub
+cluster_command = qsub
 
 [sampler]
 burn_in = 500
