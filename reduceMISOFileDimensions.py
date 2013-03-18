@@ -231,8 +231,7 @@ if __name__=='__main__':
 				os.makedirs(outputMISOPath)
 			outputMISOFileName=outputMISOPath+"/"+eventID+".miso"
 			
-			numValidLines=0
-			numInvalidLines=0
+
 			
 			eventIsoforms=[]
 			eventIDIsoformIdxKeys=eventStruct.keys()
@@ -255,7 +254,9 @@ if __name__=='__main__':
 			
 			print >> foutputMISO,"sampled_psi\tlog_score"
 			
-			sampled_psi_ave=dict()
+			numValidLines=0
+			numInvalidLines=0			
+			sampled_psi_ave=[]
 			log_score_ave=0.0
 			
 			for miso_row in range(0,len(log_score)):
@@ -286,7 +287,7 @@ if __name__=='__main__':
 				for cpsi in isoform_cpsi:
 					norm_psi=cpsi/ccpsi
 					sampled_psi_out.append(str(norm_psi))
-					if numInvalidLines==1:
+					if numValidLines==1:
 						sampled_psi_ave.append(norm_psi)
 					else:	
 						sampled_psi_ave[idxx]+=norm_psi
@@ -305,6 +306,7 @@ if __name__=='__main__':
 				#delete this file:
 				foutputMISO.close()
 				os.remove(outputMISOFileName)
+				print >> stderr,"file",outputMISOFileName,"removed because numValidLines<",abortLessThan
 			else:
 				#now calculate the average and fill up
 				if numInvalidLines>0:
